@@ -193,7 +193,7 @@
                             <div class="check-form form-row" style="margin-top:10px;">
 
                                 <div class="col-md-6 form-group" >
-                                    <select name="trein_part[]" id="adicionar" multiple>
+                                    <select name="trein_part[]" id="trein_part" multiple>
                                         <option value="">--Selecione--</option>
                                         @foreach($cp as $cp)
                                             <option value="{{$cp->id_registro}}">{{$cp->nome}}</option>
@@ -225,20 +225,20 @@
         $(document).ready(function() {
             
             $(document).ready(function () {
-                $('#adicionar').select2({
+                $('#trein_part').select2({
                     dropdownParent: $('#modal')
                 });
             });
             
 
-            $('#adicionar').hide();
+            $('#trein_part').hide();
            
             $(document).on('click','#novo_colaborador',function(event){
-                if($( "#adicionar" ).is( ":visible" )==false){
-                    $('#adicionar').show();
+                if($( "#trein_part" ).is( ":visible" )==false){
+                    $('#trein_part').show();
                 }
                 else{
-                    $('#adicionar').hide();
+                    $('#trein_part').hide();
                 }     
             });
                         
@@ -268,7 +268,7 @@
                     data: dados, // Dados a serem enviados
                     dataType:'json',
                     success: function(response){
-
+                        
                         if(response.success == true){
                             var treinamento = response.result.id_tipo_treinamento
                             var produto = response.result.id_produto
@@ -277,8 +277,8 @@
                             var carga = response.result.carga_horaria
                             var analista = response.result.analista_resp
                             var objetivo = response.result.objetivo
-                            var adicionarc = response.colaborador.id_colaborador
-                            
+                            var adicionarc = response.colaborador
+
 
                                        
                             $('#modal').modal('show');
@@ -291,9 +291,9 @@
                                 $('#carga_horaria').show()
                                 $('#m_analista').show()
                                 $('#objetivo').show()
-                                $('#adicionar').show()
+                                $('#trein_part').show()
                                 $('#id_registro').show()
-                                document.getElementById('adicionar').style.display = 'none'  
+                                //document.getElementById('trein_part').style.display = 'none'  
                                 document.getElementById('novo_colaborador').style.display = 'none' 
                                                                 
                                 
@@ -305,7 +305,7 @@
                                 $('#carga_horaria').attr("disabled", true);
                                 $('#m_analista').attr("disabled", true)
                                 $('#objetivo').attr("disabled", true)
-                                $('#adicionar').attr("disabled", true)
+                                $('#trein_part').attr("disabled", true)
                                 $('#id_registro').attr("disabled", true)
 
                                 $('#mt_treinamento').val(treinamento)
@@ -315,7 +315,14 @@
                                 $('#carga_horaria').val(carga)
                                 $('#m_analista').val(analista)
                                 $('#objetivo').val(objetivo)
-                                $('#adicionar').val(adicionarc)
+                                //$('#trein_part').val(adicionarc)
+                                //  adicionarc.forEach( function(item) {
+                                //    teste .= item + ','
+                                //  })
+                               
+                                // $('#trein_part').val([2,3,5]).change();
+                                console.log(adicionarc)
+                                $('#trein_part').select2('val', [adicionarc]);
  
                                         
                             });
