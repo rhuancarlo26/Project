@@ -119,14 +119,14 @@ class TreinamentoController extends Controller
                 $result = $item;
             }
 
-            foreach($colab as $item){
-                $colaborador = $item;
-            }
+            $idColab = $colab->pluck('id_colaborador');
+            
+
             
             $dados['success'] = true;
             $dados['message'] = 'sucesso';
             $dados['result'] = $result;
-            $dados['colaborador'] = $colaborador;
+            $dados['colaborador'] = $idColab;
 
         }
         else{
